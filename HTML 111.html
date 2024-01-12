@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator BMI - Mohammad Hasbi Hidayatulloh</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        #bmiCalculator {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #555;
+            margin-top: 0;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        label {
+            margin-top: 15px;
+            font-size: 18px;
+            color: #555;
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div id="bmiCalculator">
+    <h1>Kalkulator BMI</h1>
+    <h2>Oleh Mohammad Hasbi Hidayatulloh</h2>
+    <form id="bmiForm">
+        <label for="height">Tinggi (cm): </label>
+        <input type="number" id="height" name="height" required>
+
+        <label for="weight">Berat (kg): </label>
+        <input type="number" id="weight" name="weight" required>
+
+        <button type="button" onclick="calculateBMI()">Hitung BMI</button>
+    </form>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    function calculateBMI() {
+        var height = document.getElementById('height').value / 100; // convert to meters
+        var weight = document.getElementById('weight').value;
+
+        if (height > 0 && weight > 0) {
+            var bmi = weight / (height * height);
+            var resultElement = document.getElementById('result');
+            resultElement.innerHTML = '<h3>Hasil BMI Anda:</h3>' +
+                                      '<p>BMI: ' + bmi.toFixed(2) + '</p>' +
+                                      '<p>Interpretasi: ' + interpretBMI(bmi) + '</p>';
+        } else {
+            alert('Mohon masukkan tinggi dan berat yang valid.');
+        }
+    }
+
+    function interpretBMI(bmi) {
+        if (bmi < 18.5) {
+            return 'Berat badan kurang';
+        } else if (bmi < 24.9) {
+            return 'Berat badan normal';
+        } else if (bmi < 29.9) {
+            return 'Berat badan berlebih (Overweight)';
+        } else {
+            return 'Obesitas';
+        }
+    }
+</script>
+
+</body>
+</html>
